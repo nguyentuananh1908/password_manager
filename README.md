@@ -115,6 +115,8 @@ python -m app.main
 - Vault tự động khóa sau **2 phút** không hoạt động
 - Khi đóng ứng dụng, vault sẽ được lưu và khóa tự động
 
+### Đổi master
+
 ## 📁 Cấu trúc dự án
 
 ```
