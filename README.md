@@ -116,6 +116,10 @@ python -m app.main
 - Khi đóng ứng dụng, vault sẽ được lưu và khóa tự động
 
 ### Đổi master
+- Click nút ** Đổi master**
+- Nhập mật khẩu hiện tại
+- Nhập mật khẩu mới , xác nhận mất khẩu mới
+- Click đổi mật khẩu -> Đổi thành công
 
 ## 📁 Cấu trúc dự án
 
