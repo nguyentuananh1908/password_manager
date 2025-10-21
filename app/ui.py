@@ -26,6 +26,9 @@ class PasswordManagerUI:
         self.root.title("Password Manager")
         self.root.geometry("800x600")
         
+        # Căn giữa cửa sổ chính
+        self.center_window(self.root, 800, 600)
+        
         # Timer cho tự động khóa (2 phút = 120 giây)
         self.auto_lock_time = 120
         self.last_activity = None
@@ -72,13 +75,75 @@ class PasswordManagerUI:
         """Tự động khóa vault sau thời gian không hoạt động"""
         if self.vault.is_unlocked:
             self.vault.lock()
-            messagebox.showinfo("Tự động khóa", "Vault đã bị khóa do không hoạt động")
+            self.show_auto_lock_dialog()
             self.show_login_screen()
+    
+    def show_auto_lock_dialog(self):
+        """Hiển thị dialog thông báo tự động khóa"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("Tự động khóa")
+        dialog.geometry("400x150")
+        dialog.transient(self.root)
+        dialog.grab_set()
+        
+        # Căn giữa dialog theo cửa sổ chính
+        self.center_window(dialog, 400, 150, self.root)
+        
+        # Icon và message
+        content_frame = tk.Frame(dialog)
+        content_frame.pack(expand=True, fill='both', padx=20, pady=20)
+        
+        # Icon (sử dụng Unicode symbol)
+        icon_label = tk.Label(content_frame, text="ℹ", font=("Arial", 24), fg="blue")
+        icon_label.pack(side='left', padx=(0, 15))
+        
+        # Message
+        message_label = tk.Label(content_frame, text="Vault đã bị khóa do không hoạt động", 
+                               font=("Arial", 11), wraplength=250)
+        message_label.pack(side='left', expand=True)
+        
+        # OK button
+        button_frame = tk.Frame(dialog)
+        button_frame.pack(pady=10)
+        
+        ok_button = tk.Button(button_frame, text="OK", command=dialog.destroy,
+                             font=("Arial", 10), width=10, bg="#2196F3", fg="white")
+        ok_button.pack()
     
     def clear_frame(self):
         """Xóa frame hiện tại"""
         if self.current_frame:
             self.current_frame.destroy()
+    
+    def center_window(self, window, width=None, height=None, relative_to=None):
+        """Căn giữa cửa sổ trên màn hình hoặc theo cửa sổ khác"""
+        window.update_idletasks()
+        
+        # Lấy kích thước cửa sổ
+        if width is None:
+            width = window.winfo_width()
+        if height is None:
+            height = window.winfo_height()
+        
+        if relative_to is None:
+            # Căn giữa trên màn hình
+            screen_width = window.winfo_screenwidth()
+            screen_height = window.winfo_screenheight()
+            x = (screen_width - width) // 2
+            y = (screen_height - height) // 2
+        else:
+            # Căn giữa theo cửa sổ khác
+            relative_to.update_idletasks()
+            parent_x = relative_to.winfo_x()
+            parent_y = relative_to.winfo_y()
+            parent_width = relative_to.winfo_width()
+            parent_height = relative_to.winfo_height()
+            
+            x = parent_x + (parent_width - width) // 2
+            y = parent_y + (parent_height - height) // 2
+        
+        # Đặt vị trí cửa sổ
+        window.geometry(f"{width}x{height}+{x}+{y}")
     
     def show_login_screen(self):
         """Hiển thị màn hình đăng nhập"""
@@ -314,6 +379,9 @@ class PasswordManagerUI:
         dialog.transient(self.root)
         dialog.grab_set()
         
+        # Căn giữa dialog theo cửa sổ chính
+        self.center_window(dialog, 500, 400, self.root)
+        
         # Form
         form_frame = tk.Frame(dialog)
         form_frame.pack(expand=True, fill='both', padx=20, pady=20)
@@ -398,6 +466,9 @@ class PasswordManagerUI:
         dialog.transient(self.root)
         dialog.grab_set()
         
+        # Căn giữa dialog theo cửa sổ chính
+        self.center_window(dialog, 450, 350, self.root)
+        
         # Length
         tk.Label(dialog, text="Độ dài password:", font=("Arial", 11)).pack(pady=10)
         length_var = tk.IntVar(value=16)
@@ -467,6 +538,9 @@ class PasswordManagerUI:
         dialog.geometry("520x300")
         dialog.transient(self.root)
         dialog.grab_set()
+        
+        # Căn giữa dialog theo cửa sổ chính
+        self.center_window(dialog, 520, 300, self.root)
 
         form = tk.Frame(dialog)
         form.pack(expand=True, fill='both', padx=20, pady=20)
