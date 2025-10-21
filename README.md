@@ -4,7 +4,7 @@
 
 ## ✨ Tính năng
 
-- 🔐 **Mã hóa mạnh mẽ**: AES-256-GCM cho toàn bộ dữ liệu
+- 🔐 **Mã hóa**: AES-256-GCM cho toàn bộ dữ liệu
 - 🔑 **Argon2id KDF**: Derive khóa an toàn từ master password
 - ➕ **Quản lý mật khẩu**: Thêm, sửa, xóa, xem mật khẩu
 - 🎲 **Sinh mật khẩu ngẫu nhiên**: Tùy chỉnh độ dài và ký tự
